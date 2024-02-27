@@ -49,5 +49,23 @@
 		container.appendChild(element)
 		
 	}
+	    function remove() {
+		let divListItems = document.getElementsByClassName('divlist');
+		let length = divListItems.length;
+		if (length > 0) {
+			let middleItem = Math.floor(length / 2);
+			divListItems[middleItem].remove();
+		}
+	}
+	    function addFront() {
+		/* make the div and its text */
+		let element = document.createElement("div")
+		element.innerHTML = document.getElementById('text').value
+		element.style.color = "blue"
+		/* add it to the container */
+		let container = document.getElementById('target')
+		element.setAttribute("class", " divlist")
+		container.insertBefore(element, container.firstChild);
+	}
 </script>
 </html>	

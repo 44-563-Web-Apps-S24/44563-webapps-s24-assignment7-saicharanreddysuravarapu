@@ -54,8 +54,9 @@
     <p>Click on the locations to find coins, beware the monster</p>
     <p id="locations">Number of locations checked is zero.</p>
     <p id="score">Score is zero.</p>
-    <p>Click for help.</p>
+    <p class="click" onclick="help()">Click for help.</p>
     <p id="help">Help report</p>
+    <button type="button" class="btn btn-info" onclick="newGame()"> New Game</button>
 
     <div class="row">
         <div class="location"id= "Image0" onclick="check(0)"><img src="building.jpg" alt="Building"></div>
@@ -163,6 +164,32 @@
             }
             document.getElementById("help").innerHTML = returnValue;
         }
+        function newGame() {
+    monsterLocation = Math.floor(Math.random() * 35);
+    fancyCoinLocations = [];
+
+    while (fancyCoinLocations.length < 6) {
+        var randomValue = Math.floor(Math.random() * 35);
+        if (!fancyCoinLocations.includes(randomValue) && randomValue !== monsterLocation) {
+            fancyCoinLocations.push(randomValue);
+        }
+    }
+    console.log(fancyCoinLocations);
+    console.log(monsterLocation);
+
+    locations = 0
+    score = 0
+    lastLocation = 0
+    gameOver = false
+    
+    document.getElementById("score").innerHTML = "Score is " + score + ".";
+    document.getElementById("locations").innerHTML = "Number of locations checked is " + locations + ".";
+
+    for (let i = 0; i < 35; i++) {
+        document.getElementById("Image" + i).firstChild.src = "building.jpg";
+    }
+    document.getElementById("help").innerHTML = "Help report";
+}
     </script>
    
 </body>

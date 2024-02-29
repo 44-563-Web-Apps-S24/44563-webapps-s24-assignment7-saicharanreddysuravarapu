@@ -1,34 +1,40 @@
 <!DOCTYPE html>
-<html> <head> <style>
-    .flex-container {
-      display: flex;  flex-direction:row;
-      background-color: red;
-  }
+<html>
 
-.flex-container > div {  /*div children of the flex container*/
-  background-color: #f1f1f1; 
-  margin: 10px;  padding: 20px;  font-size: 30px;
-}
+<head>
+	<title>Divlist-File</title>
+	<style>
+		.flex-container {
+			display: flex;
+			flex-direction: row;
+			background-color: red;
+		}
 
-/* Responsive layout */
-@media (max-width: 600px) { 
-	 .flex-container{
-		 flex-direction:column;
-		 background-color: green;
-	  }
-	}
-</style></head>
+		.flex-container>div {
+			background-color: #f1f1f1;
+			margin: 10px;
+			padding: 20px;
+			font-size: 30px;
+		}
 
-
+		@media (max-width: 600px) {
+			.flex-container {
+				flex-direction: column;
+				background-color: green;
+			}
+		}
+	</style>
+</head>
 
 <body>
 
 	<div class="container">
-		<h2>Sai Charan Reddy Suravarapu builds list with divs</h2>
+		<h2>Sai Charan Reddy Suravarapu builds a list with divs</h2>
 		<input type="text" id="text">
 		<button onclick="makeNewDiv()">Add end</button>
 		<button onclick="addFront()">Add front</button>
 		<button onclick="remove()">Remove</button>
+		<button onclick="swapElements()">Swap</button>
 		<div class="flex-container" id="target">
 			<div class="divlist">First item</div>
 			<div class="divlist">Second item</div>
@@ -36,36 +42,50 @@
 		</div>
 	</div>
 
-</body>
-<script>
-	function makeNewDiv(){
-		/* make the div and its text */
-		let element = document.createElement("div")
-		element.innerHTML = document.getElementById('text').value
-		element.style.color = "orange"
-		/* add it to the container */
-		let container = document.getElementById('target')
-		element.setAttribute("class", " divlist")
-		container.appendChild(element)
-		
-	}
-	    function remove() {
-		let divListItems = document.getElementsByClassName('divlist');
-		let length = divListItems.length;
-		if (length > 0) {
-			let middleItem = Math.floor(length / 2);
-			divListItems[middleItem].remove();
+	<script>
+		function makeNewDiv() {
+			let element = document.createElement("div")
+			element.innerHTML = document.getElementById('text').value
+			element.style.color = "orange"
+			let container = document.getElementById('target')
+			element.setAttribute("class", " divlist")
+			container.appendChild(element)
 		}
-	}
-	    function addFront() {
-		/* make the div and its text */
-		let element = document.createElement("div")
-		element.innerHTML = document.getElementById('text').value
-		element.style.color = "orange"
-		/* add it to the container */
-		let container = document.getElementById('target')
-		element.setAttribute("class", " divlist")
-		container.insertBefore(element, container.firstChild);
-	}
-</script>
-</html>	
+
+		function remove() {
+			let divListItems = document.getElementsByClassName('divlist');
+			let length = divListItems.length;
+			if (length > 0) {
+				let middleItem = Math.floor(length / 2);
+				divListItems[middleItem].remove();
+			}
+		}
+
+		function addFront() {
+			let element = document.createElement("div")
+			element.innerHTML = document.getElementById('text').value
+			element.style.color = "orange"
+			let container = document.getElementById('target')
+			element.setAttribute("class", " divlist")
+			container.insertBefore(element, container.firstChild);
+		}
+
+		function swapElements() {
+			let divListItems = document.getElementsByClassName('divlist');
+			let length = divListItems.length;
+
+			if (length >= 2) {
+				let index1 = Math.floor(Math.random() * length);
+				let index2 = Math.floor(Math.random() * (length - 1));
+				index2 = (index2 >= index1) ? index2 + 1 : index2;
+
+				let temp = divListItems[index1].cloneNode(true);
+				divListItems[index1].replaceWith(divListItems[index2].cloneNode(true));
+				divListItems[index2].replaceWith(temp);
+			}
+		}
+	</script>
+
+</body>
+
+</html>
